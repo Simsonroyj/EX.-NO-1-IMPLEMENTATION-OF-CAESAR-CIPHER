@@ -42,17 +42,17 @@ int main() {
     char message[100];
     int key;
 
-    printf("Enter the message to encrypt: ");
+    printf("Enter text: ");
     fgets(message, sizeof(message), stdin);
 
-    printf("Enter the Caesar Cipher key: ");
+    printf("Enter the shift value: ");
     scanf("%d", &key);
 
     caesarEncrypt(message, key);
-    printf("Encrypted Message: %s", message);
+    printf("Encrypted: %s", message);
 
     caesarDecrypt(message, key);
-    printf("Decrypted Message: %s", message);
+    printf("Decrypted: %s", message);
 
     return 0;
 }
