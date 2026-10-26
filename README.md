@@ -17,25 +17,46 @@ STEP-5: Display the cipher text obtained above.
 
 ## PROGRAM:
 ```
-def caesar(text, shift, mode):
-    result = ""
-    if mode == "decrypt":
-        shift = -shift
 
-    for char in text:
-        if char.isalpha():
-            base = 65 if char.isupper() else 97
-            result += chr((ord(char) - base + shift) % 26 + base)
-        else:
-            result += char
-    return result
+#include <stdio.h>
+#include <stdlib.h>
 
-text = input("Enter text: ")
-shift = int(input("Enter shift value: "))
+void caesarEncrypt(char *text, int key) {
+    for (int i = 0; text[i] != '\0'; i++) {
+        char c = text[i];
 
-encrypted = caesar(text, shift, "encrypt")
-print("Encrypted:", encrypted)
-print("Decrypted:", caesar(encrypted, shift, "decrypt"))
+        if (c >= 'A' && c <= 'Z') {
+            text[i] = ((c - 'A' + key) % 26 + 26) % 26 + 'A';
+        }
+        else if (c >= 'a' && c <= 'z') {
+            text[i] = ((c - 'a' + key) % 26 + 26) % 26 + 'a';
+        }
+    }
+}
+
+void caesarDecrypt(char *text, int key) {
+    caesarEncrypt(text, -key);
+}
+
+int main() {
+    char message[100];
+    int key;
+
+    printf("Enter the message to encrypt: ");
+    fgets(message, sizeof(message), stdin);
+
+    printf("Enter the Caesar Cipher key: ");
+    scanf("%d", &key);
+
+    caesarEncrypt(message, key);
+    printf("Encrypted Message: %s", message);
+
+    caesarDecrypt(message, key);
+    printf("Decrypted Message: %s", message);
+
+    return 0;
+}
+
 ```
 ## OUTPUT:
 <img width="360" height="265" alt="image" src="https://github.com/user-attachments/assets/2fa89a5a-3dcb-48a9-90f0-ed4d58b4352f" />
